@@ -1,0 +1,30 @@
+ion-label, ion-text, ion-input, ion-datetime {
+    font-size: 13px !important;
+}
+
+.sharing {
+    width: 100%;
+    display: block;
+    font-size: 13px !important;
+}
+
+.success-message {
+  text-align: left;
+    color: #229c1c;
+    padding: 10px;
+    background-color: #bef2bb;
+  }
+  
+  .warn-message {
+    text-align: left;
+    color: #EBA324;
+    padding: 10px;
+    background-color: #FFE6BA;
+  }
+  
+  .error-message {
+    text-align: left;
+    color: #e80c4d;
+    padding: 10px;
+    background-color: #ffeeee;
+  }

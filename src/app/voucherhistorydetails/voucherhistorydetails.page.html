@@ -1,0 +1,90 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true" style="--background: #f1f1f2;">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-top: -3px; text-transform: uppercase;">
+    Voucher Details
+  </div>
+
+  <ion-grid style="text-align: center; padding: 0 10px; color: #000000; box-shadow: 0 10px 6px -6px #777; padding-bottom: 10px; background: #ffffff; margin-bottom: 10px; font-size: 13px;">
+
+    <ion-row>
+      <ion-col size="12" style="text-align: center; padding: 0;">
+        
+        <p style="margin: 20px 0;">
+          <img [src]="this.auth.APIUrl + this.auth.Voucher.LogoImageURL" style="max-height: 100px; max-width: 100%; padding: 0 20px;" />
+        </p>
+
+        <p style="display: flex; justify-content: center; margin-top: 30px;">
+            <span style="background: #58585b; color: #fff; font-size: 21px; padding: 15px 0; border-radius: 10px; display: block; width: 80%;">
+              {{this.auth.Voucher.TradingPartnerName}} Voucher
+            </span>
+        </p>
+
+        <p>
+          Expiry Date: {{this.auth.Voucher.VoucherExpiryDate1}}
+          <span style="padding: 0 5px;">|</span>
+          Ts & Cs Apply
+        </p>
+
+        <p style="font-size: 20px;">
+            <strong>Gift Voucher Code</strong>
+        </p>
+
+        <p style="display: flex; justify-content: center;">
+            <span style="border: 1px solid #58585b; padding: 10px 0; border-radius: 30px; font-size: 18px; display: block; width: 80%;">
+              {{this.auth.Voucher.VoucherCode}}
+            </span>
+        </p>
+
+        <p style="font-size: 13px; margin-top: 20px;">
+          TERMS AND CONDITIONS
+        </p>
+  
+        <div class="rich-text" [innerHTML]="this.auth.Voucher.PayNowTnC" style="margin-bottom: 20px;"></div>
+    
+        <p style="text-align: center; font-size: 14px;">
+          <a (click)="this.auth.OpenSystemLink('https://www.icebolethugroup.co.za/isave-rewards/')">
+            <strong>View Full Terms and Conditions</strong>
+          </a>
+        </p>
+
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

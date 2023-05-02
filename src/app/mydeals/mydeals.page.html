@@ -1,0 +1,613 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true" style="--background: #f1f1f2;">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <img alt="User Profile" [src]="this.auth.MarketingBannerUrl" style="max-width: 100%;" />
+
+  <div [class.sticky-category]="this.auth.StickyCategory">
+
+    <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-top: -3px; text-transform: uppercase;">
+      My Deals
+    </div>
+  
+    <div class="my-grid-slide">
+  
+      <div class="scrollable">
+  
+        <ion-grid [style]="this.GetWidth()">
+    
+          <ion-row>
+    
+            <ion-col>
+              <a (click)="this.ShowDeal('All');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="All Deals" [src]="this.AllDealsSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  All Deals
+                </p>
+              </a>
+            </ion-col>
+    
+            <ion-col>
+              <a (click)="this.ShowDeal('Coupons');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.CouponsSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Coupons
+                </p>
+              </a>
+            </ion-col>
+    
+            <ion-col *ngIf="this.HasCategory('Vouchers')">
+              <a (click)="this.ShowDeal('Vouchers');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.VouchersSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Vouchers
+                </p>
+              </a>
+            </ion-col>
+    
+            <ion-col *ngIf="this.HasCategory('Travel')">
+              <a (click)="this.ShowDeal('Travel');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.TravelSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Travel
+                </p> 
+              </a>
+            </ion-col>
+    
+            <ion-col *ngIf="this.HasCategory('Soccer')">
+              <a (click)="this.ShowDeal('Soccer');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.SoccerSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Sports
+                </p> 
+              </a>
+            </ion-col>
+    
+            <ion-col *ngIf="this.HasCategory('Spa')">
+              <a (click)="this.ShowDeal('Spa');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.SpaSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Spa
+                </p> 
+              </a>
+            </ion-col>
+    
+            <ion-col *ngIf="this.HasCategory('Education')">
+              <a (click)="this.ShowDeal('Education');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.EducationSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Education
+                </p> 
+              </a>
+            </ion-col>
+    
+            <ion-col *ngIf="this.HasCategory('Entertainment')">
+              <a (click)="this.ShowDeal('Entertainment');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.EntertainmentSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Entertainment
+                </p> 
+              </a>
+            </ion-col>
+    
+            <ion-col *ngIf="this.HasCategory('Fast Food')">
+              <a (click)="this.ShowDeal('Fast Food');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.FastFoodSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Fast Food
+                </p> 
+              </a>
+            </ion-col>
+    
+            <ion-col *ngIf="this.HasCategory('Online Shopping')">
+              <a (click)="this.ShowDeal('Online Shopping');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.OnlineShoppingSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Retail
+                </p> 
+              </a>
+            </ion-col>
+    
+            <ion-col *ngIf="this.HasCategory('Cosmetics')">
+              <a (click)="this.ShowDeal('Cosmetics');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.CosmeticsSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Cosmetics
+                </p> 
+              </a>
+            </ion-col>
+    
+            <ion-col *ngIf="this.HasCategory('Car Hire')">
+              <a (click)="this.ShowDeal('Car Hire');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.CarHireSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Car Hire
+                </p> 
+              </a>
+            </ion-col>
+    
+            <ion-col *ngIf="this.HasCategory('Assistance')">
+              <a (click)="this.ShowDeal('Assistance');" style="text-align: center; display: block; text-decoration: none;">
+    
+                <p style="margin-top: 10px;">
+                  <img alt="coupons" [src]="this.AssistanceSrc" style="width: 50px;" />
+                </p>
+    
+                <p style="margin-top: 0; margin-bottom: 20px; color: #000000; font-size: 12px;">
+                  Get Help
+                </p> 
+              </a>
+            </ion-col>
+          
+          </ion-row>
+    
+        </ion-grid>
+  
+      </div>
+  
+      <p style="margin: 0; display: none;">
+        <img alt="->..." [src]="this.ScrollIconSrc" style="width: 60px;" />
+      </p>
+  
+    </div>
+  
+    <div *ngIf="this.Deals == undefined || this.Deals.length <= 0" style="margin: 20px; background: #f9d9d9; padding: 10px; font-size: 13px;">
+      No deals found...
+    </div>
+
+  </div>
+
+  <ion-list style="background: #f1f1f2 !important; padding-top: 0px;">
+
+    <div *ngFor="let d of this.Deals">
+
+      <div *ngIf="d != undefined && d.Category == 'Coupons' && d.Vendors != undefined && d.Vendors.length > 0">
+
+        <div *ngFor="let v of d.Vendors">
+
+          <ion-item (click)="this.GoToCouponDeal(d, v)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+            <ion-grid>
+              <ion-row>
+                <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+                  <img [src]="v.PartnerWidgetImage" style="max-height: 100%; max-width: 100%;" />
+                </ion-col>
+                <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+                  <ion-label>
+      
+                    <strong style="padding-bottom: 10px; display: block;">{{v.Name}}</strong>
+                    
+                    <span style="font-size: 12px !important; white-space: normal;">
+                      {{d.CampaignTier.DealTitle}}
+                    </span>
+            
+                  </ion-label>
+                </ion-col>
+                <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+                  <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+      
+          </ion-item>
+          
+        </div>
+
+      </div>
+
+      <ion-item *ngIf="d != undefined && d.Category == 'Vouchers'" (click)="this.GoToVoucherDeal(d)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+              <img [src]="this.auth.APIUrl + d.LogoImageURL" style="max-height: 100%; max-width: 100%;" />
+            </ion-col>
+            <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+              <ion-label>
+  
+                <strong style="padding-bottom: 10px; display: block;">{{d.TradingPartnerName}}</strong>
+                
+                <span style="font-size: 12px !important; white-space: normal;">
+                  {{d.CampaignTier.DealTitle}}
+                </span>
+        
+              </ion-label>
+            </ion-col>
+            <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+              <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  
+      </ion-item>
+
+      <div *ngIf="d != undefined && d.Category == 'Travel'">
+
+        <ion-item (click)="this.GoToTravelDeal(d)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+                <img [src]="this.auth.APIUrl + d.LogoImageURL" style="max-height: 100%; max-width: 100%;" />
+              </ion-col>
+              <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+                <ion-label>
+    
+                  <strong style="padding-bottom: 10px; display: block;">{{d.TradingPartnerName}}</strong>
+                  
+                  <span style="font-size: 12px !important; white-space: normal;">
+                    {{d.CampaignTier.DealTitle}}
+                  </span>
+          
+                </ion-label>
+              </ion-col>
+              <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+                <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+  
+      </div>
+
+      <div *ngIf="d != undefined && d.Category == 'Soccer'">
+
+        <ion-item (click)="this.GoToSoccerDeal(d)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+                <img [src]="this.auth.APIUrl + d.LogoImageURL" style="max-height: 100%; max-width: 100%;" />
+              </ion-col>
+              <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+                <ion-label>
+    
+                  <strong style="padding-bottom: 10px; display: block;">{{d.TradingPartnerName}}</strong>
+                  
+                  <span style="font-size: 12px !important; white-space: normal;">
+                    {{d.CampaignTier.DealTitle}}
+                  </span>
+          
+                </ion-label>
+              </ion-col>
+              <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+                <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+  
+      </div>
+
+      <div *ngIf="d != undefined && d.Category == 'Spa'">
+
+        <ion-item (click)="this.GoToSpaDeal(d)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+                <img [src]="this.auth.APIUrl + d.LogoImageURL" style="max-height: 100%; max-width: 100%;" />
+              </ion-col>
+              <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+                <ion-label>
+    
+                  <strong style="padding-bottom: 10px; display: block;">{{d.TradingPartnerName}}</strong>
+                  
+                  <span style="font-size: 12px !important; white-space: normal;">
+                    {{d.CampaignTier.DealTitle}}
+                  </span>
+          
+                </ion-label>
+              </ion-col>
+              <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+                <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+  
+      </div>
+
+      <div *ngIf="d != undefined && d.Category == 'Education'">
+
+        <ion-item (click)="this.GoToEducationDeal(d)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+                <img [src]="this.auth.APIUrl + d.LogoImageURL" style="max-height: 100%; max-width: 100%;" />
+              </ion-col>
+              <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+                <ion-label>
+    
+                  <strong style="padding-bottom: 10px; display: block;">{{d.TradingPartnerName}}</strong>
+                  
+                  <span style="font-size: 12px !important; white-space: normal;">
+                    {{d.CampaignTier.DealTitle}}
+                  </span>
+          
+                </ion-label>
+              </ion-col>
+              <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+                <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+  
+      </div>
+
+      <div *ngIf="d != undefined && d.Category == 'Entertainment'">
+
+        <ion-item (click)="this.GoToEntertainmentDeal(d)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+                <img [src]="this.auth.APIUrl + d.LogoImageURL" style="max-height: 100%; max-width: 100%;" />
+              </ion-col>
+              <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+                <ion-label>
+    
+                  <strong style="padding-bottom: 10px; display: block;">{{d.TradingPartnerName}}</strong>
+                  
+                  <span style="font-size: 12px !important; white-space: normal;">
+                    {{d.CampaignTier.DealTitle}}
+                  </span>
+          
+                </ion-label>
+              </ion-col>
+              <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+                <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+  
+      </div>
+
+      <div *ngIf="d != undefined && d.Category == 'Fast Food'">
+
+        <ion-item (click)="this.GoToFastFoodDeal(d)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+                <img [src]="this.auth.APIUrl + d.LogoImageURL" style="max-height: 100%; max-width: 100%;" />
+              </ion-col>
+              <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+                <ion-label>
+    
+                  <strong style="padding-bottom: 10px; display: block;">{{d.TradingPartnerName}}</strong>
+                  
+                  <span style="font-size: 12px !important; white-space: normal;">
+                    {{d.CampaignTier.DealTitle}}
+                  </span>
+          
+                </ion-label>
+              </ion-col>
+              <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+                <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+  
+      </div>
+
+      <div *ngIf="d != undefined && d.Category == 'Online Shopping'">
+
+        <ion-item (click)="this.GoToOnlineShoppingDeal(d)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+                <img [src]="this.auth.APIUrl + d.LogoImageURL" style="max-height: 100%; max-width: 100%;" />
+              </ion-col>
+              <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+                <ion-label>
+    
+                  <strong style="padding-bottom: 10px; display: block;">{{d.TradingPartnerName}}</strong>
+                  
+                  <span style="font-size: 12px !important; white-space: normal;">
+                    {{d.CampaignTier.DealTitle}}
+                  </span>
+          
+                </ion-label>
+              </ion-col>
+              <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+                <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+  
+      </div>
+
+      <div *ngIf="d != undefined && d.Category == 'Cosmetics'">
+
+        <ion-item (click)="this.GoToCosmeticsDeal(d)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+                <img [src]="this.auth.APIUrl + d.LogoImageURL" style="max-height: 100%; max-width: 100%;" />
+              </ion-col>
+              <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+                <ion-label>
+    
+                  <strong style="padding-bottom: 10px; display: block;">{{d.TradingPartnerName}}</strong>
+                  
+                  <span style="font-size: 12px !important; white-space: normal;">
+                    {{d.CampaignTier.DealTitle}}
+                  </span>
+          
+                </ion-label>
+              </ion-col>
+              <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+                <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+  
+      </div>
+
+      <div *ngIf="d != undefined && d.Category == 'Assistance'">
+
+        <ion-item (click)="this.GoToAssistanceDeal(d)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+                <img [src]="this.auth.APIUrl + d.LogoImageURL" style="max-height: 100%; max-width: 100%;" />
+              </ion-col>
+              <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+                <ion-label>
+    
+                  <strong style="padding-bottom: 10px; display: block;">{{d.TradingPartnerName}}</strong>
+                  
+                  <span style="font-size: 12px !important; white-space: normal;">
+                    {{d.CampaignTier.DealTitle}}
+                  </span>
+          
+                </ion-label>
+              </ion-col>
+              <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+                <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+  
+      </div>
+
+      <div *ngIf="d != undefined && d.Category == 'Car Hire'">
+
+        <ion-item (click)="this.GoToCarHireDeal(d)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" style="justify-content: center; padding: 0; height: 50px; display: flex; align-items: center; padding-right: 10px;">
+                <img [src]="this.auth.APIUrl + d.LogoImageURL" style="max-height: 100%; max-width: 100%;" />
+              </ion-col>
+              <ion-col size="8" style="text-align: left; padding: 0; display: flex; align-items: center;">
+                <ion-label>
+    
+                  <strong style="padding-bottom: 10px; display: block;">{{d.TradingPartnerName}}</strong>
+                  
+                  <span style="font-size: 12px !important; white-space: normal;">
+                    {{d.CampaignTier.DealTitle}}
+                  </span>
+          
+                </ion-label>
+              </ion-col>
+              <ion-col size="1" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+                <ion-icon name="chevron-forward-outline" style="color: #58585b;"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+  
+      </div>
+
+    </div>
+
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

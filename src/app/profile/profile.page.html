@@ -1,0 +1,165 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" style="padding: 0 20px;">
+
+  <div style="text-align: center; position: relative; background-image: url('./../assets/imgs/home-bg.png'); background-position: center bottom; background-size: cover;background-repeat: no-repeat; padding: 30px 0;">
+
+    <ion-grid style="padding-top: 30px;">
+      <ion-row>
+        <ion-col style="display: flex; justify-content: center; position: relative;">
+
+          <ion-avatar style="width: 80px; height: 80px; position: relative;" (click)="this.PresentPhotoOptions(true)">
+            <img alt="User Profile" [src]="this.auth.SelfieUrl" />
+          </ion-avatar>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+
+          <p style="font-weight: bold; color: #fff; margin-bottom: -10px; display: inline-block; padding: 0 40px 15px 40px;">
+            {{this.auth.CurrentUser.Name}} {{this.auth.CurrentUser.Surname}}
+          </p>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+  <div *ngIf="!this.ShowSettings && !this.ShowContactInfo;" style="text-align: center; padding: 0 10px; margin-top: 40px; color: #000000; font-size: 13px;">
+
+    <span style="box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 10px; margin-right: 20px; width: 110px; padding: 0; display: inline-block;">
+      <a (click)="this.ShowContactInfo = true;" style="text-align: center; display: block; text-decoration: none;">
+
+        <p style="margin-top: 20px;">
+          <img alt=".." src="../../assets/imgs/contactus.png" style="width: 30px;" />
+        </p>
+
+        <p style="margin-top: 0; margin-bottom: 20px; color: #000000;">
+          Contact Info
+        </p>
+      </a>
+    </span>
+
+    <span style="box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 10px; margin-right: 0; width: 110px; padding: 0; display: inline-block;">
+      <a (click)="this.ShowSettings = true;" style="text-align: center; display: block; text-decoration: none;">
+
+        <p style="margin-top: 20px;">
+          <img alt=".." src="../../assets/imgs/settings.png" style="width: 30px;" />
+        </p>
+
+        <p style="margin-top: 0; margin-bottom: 20px; color: #000000;">
+          Settings
+        </p>
+      </a>
+    </span>
+
+    <p style="margin-top: 30px;">
+      <ion-button type="button" shape="round" expand="full" (click)="this.ConfirmDelete()" style="--background: #f7453d; color: #ffffff;">
+        <ion-icon name="close" slot="start" style="color: #ffffff;"></ion-icon>
+        Delete My Account
+      </ion-button>
+    </p>
+
+  </div>
+
+  <div *ngIf="this.ShowContactInfo == true;" style="color: #000000; box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 6px; margin: 0 20px; padding: 10px; margin-top: 20px; font-size: 13px;">
+
+    <p>
+      <strong>Contact Information</strong>
+    </p>
+
+    <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+      <ion-input type="text" name="MobileNumber" [(ngModel)]="MobileNumber" placeholder="Mobile Number" disabled="true">
+        <ion-icon name="phone-portrait-outline" slot="left" style="color: #58585b; padding-right: 10px;"></ion-icon>
+      </ion-input>
+    </ion-item>
+
+    <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+      <ion-input type="email" name="EmailAddress" [(ngModel)]="EmailAddress" placeholder="Email Address" disabled="true">
+        <ion-icon name="mail-outline" slot="left" style="color: #58585b; padding-right: 10px;"></ion-icon>
+      </ion-input>
+    </ion-item> 
+
+  </div>
+
+  <div *ngIf="this.ShowSettings == true;" style="color: #000000; box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 6px; margin: 0 20px; padding: 10px; margin-top: 20px; font-size: 13px;">
+
+    <form (submit)="this.Update()">
+  
+      <p>
+        <strong>Change Pin (e.g 1234)</strong>
+      </p>
+  
+      <ion-grid style="padding: 0;">
+    
+        <ion-row>
+          <ion-col size="6" style="text-align: left; display: flex; align-items: center;">
+  
+            <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+              <ion-input type="password" name="Pin" [(ngModel)]="Pin" placeholder="Update Pin">
+                <ion-icon name="lock-closed-outline" slot="left" style="color: #58585b; padding-right: 10px;"></ion-icon>
+              </ion-input>
+            </ion-item>
+  
+          </ion-col>
+          <ion-col size="6" style="text-align: right;">
+  
+            <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+              <ion-input type="password" name="ConfirmPin" [(ngModel)]="ConfirmPin" placeholder="Retype Pin">
+                <ion-icon name="lock-closed-outline" slot="left" style="color: #58585b; padding-right: 10px;"></ion-icon>
+              </ion-input>
+            </ion-item>
+  
+          </ion-col>
+        </ion-row>
+    
+      </ion-grid>
+  
+      <ion-grid style="padding: 0; margin-top: 10px;">
+        
+        <ion-row>
+          <ion-col size="12" style="padding: 0; text-align: center;" class="ion-text-center">
+  
+            <ion-button type="submit" shape="round" expand="full" style="--background: #58585b; color: #ffffff;">
+              <ion-icon name="create" slot="start" style="color: #ffffff;"></ion-icon>
+              Update
+            </ion-button>
+  
+          </ion-col>
+        </ion-row>
+    
+      </ion-grid>
+  
+    </form>
+
+  </div>
+
+  <div style="margin-bottom: 150px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

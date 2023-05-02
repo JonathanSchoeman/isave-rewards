@@ -1,0 +1,95 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true" style="--background: #f1f1f2;">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-top: -3px; text-transform: uppercase;">
+    Voucher Details
+  </div>
+
+  <ion-grid style="text-align: center; padding: 0 10px; color: #000000; box-shadow: 0 10px 6px -6px #777; padding-bottom: 10px; background: #ffffff; margin-bottom: 20px;">
+
+    <ion-row>
+      <ion-col size="12" style="text-align: center; padding: 0;">
+        <p>
+          <img alt="." [src]="this.auth.APIUrl + this.auth.VoucherDeal.LogoImageURL" style="max-width: 100%; max-height: 100px; padding: 0 20px;" />
+        </p>
+
+        <p style="font-size: 15px; display: none;">
+          {{this.auth.VoucherDeal.TradingPartnerName}}
+        </p>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <div style="margin: 0 20px;">
+
+    <div class="rich-text" [innerHTML]="this.auth.VoucherDeal.Summary" style="margin-bottom: 20px;"></div>
+
+    <p style="font-size: 13px;">
+      TERMS AND CONDITIONS
+    </p>
+  
+    <div class="rich-text" [innerHTML]="this.auth.VoucherDeal.TnC" style="margin-bottom: 20px;"></div>
+
+    <div *ngIf="this.auth.VoucherDeal.Amounts && this.auth.VoucherDeal.Amounts.length > 1" style="background-color: #fff; padding: 20px; margin-bottom: 20px;">
+
+      <p style="margin-top: 0; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+        <strong>{{this.auth.VoucherDeal.CampaignTier.DealTitle}}</strong>
+      </p>
+  
+      <ion-item style="--background: #f1f1f2;">
+        <ion-label class="required">Select Amount</ion-label>
+        <ion-select name="Amount" [(ngModel)]="Amount" [disabled]="!this.auth.VoucherDeal.Amounts.length">
+          <ion-select-option *ngFor="let a of this.auth.VoucherDeal.Amounts" [value]="a">
+            R{{a}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </div>
+
+    <div style="margin-bottom: 20px; text-align: center;" *ngIf="!this.auth.VoucherDeal.ShortCode">
+      <ion-button type="button" shape="round" expand="full" (click)="this.Confirm()" style="--background: #f28522; color: #ffffff; font-size: 14px;">
+        REQUEST A VOUCHER
+      </ion-button>
+    </div>
+
+  </div>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <a (click)="this.auth.SendSMS(this.auth.VoucherDeal.ShortCode, this.auth.CurrentUser.Name + ' ' + this.auth.CurrentUser.Surname)" *ngIf="this.auth.VoucherDeal.ShortCode" style="color: #fff !important; position: absolute; right: 10px;">Send SMS Now</a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

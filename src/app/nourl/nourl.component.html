@@ -1,0 +1,18 @@
+
+<div style="background: #fff; text-align: center; padding: 10px; color: #000;">
+
+  <div [innerHTML]="this.auth.Rules.Client.PayPolicyNote" class="rich-text" style="text-align: left;"></div>
+
+  <ion-grid style="margin: 10px -10px -10px -10px; background: #f28522; text-align: center; padding: 0px !important;">
+    
+    <ion-row>
+      <ion-col (click)="this.Ok()" style="padding: 15px 0; border-top: 1px solid #fff;" class="ion-text-center">
+  
+        <a>OK</a>
+  
+      </ion-col>
+    </ion-row>
+  
+  </ion-grid>
+
+</div>

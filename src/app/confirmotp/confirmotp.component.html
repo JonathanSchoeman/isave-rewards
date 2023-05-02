@@ -1,0 +1,48 @@
+
+
+<div style="background: #fff; text-align: center; padding: 10px;">
+
+  <p style="font-size: 16px !important; margin-top: 0;">
+    Enter your 5-digit OTP
+  </p>
+
+  <p>
+    Enter your 5-digit OTP sent to {{this.auth.UpdatedUser.SecretCell}} below
+  </p>
+
+  <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+    <ion-input type="text" name="OTP" [(ngModel)]="OTP" placeholder="One Time Pin (0TP)">
+      <ion-icon name="lock-closed" slot="left" style="color: #58585b; padding-right: 10px;"></ion-icon>
+    </ion-input>
+  </ion-item>
+
+  <p style="font-size: 14px !important;">
+    <a (click)="this.Send()">Resend OTP to {{this.auth.UpdatedUser.SecretCell}}</a>
+  </p>
+
+  <p *ngIf="this.ShowError" style="color: #f00d0d;">
+    {{this.Error}}
+  </p>
+
+  <p *ngIf="this.ShowSuccess" style="color: #1efd01;">
+    OTP sent to your Mobile Number
+  </p>
+
+  <ion-grid style="margin: 10px -10px -10px -10px; text-align: center; padding: 0px !important;">
+    
+    <ion-row>
+      <ion-col (click)="this.Cancel()" style="padding: 15px 0; border-top: 1px solid #fff; border-right: 1px solid #fff; background: #58585b;">
+  
+        <a style="color: #fff !important;">Cancel</a>
+  
+      </ion-col>
+      <ion-col (click)="this.Validate()" style="padding: 15px 0; border-top: 1px solid #fff; background: #f28522;">
+  
+        <a style="color: #fff !important;">Submit</a>
+  
+      </ion-col>
+    </ion-row>
+  
+  </ion-grid>
+
+</div>

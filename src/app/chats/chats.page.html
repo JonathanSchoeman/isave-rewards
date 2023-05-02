@@ -1,0 +1,102 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true" style="padding: 0 20px;">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!this.auth.CurrentUser.IsAdmin" (click)="Add();">
+    <ion-fab-button>
+      <ion-icon name="add" style="color: #ffffff;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-refresher (ionRefresh)="Refresh($event)" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-bottom: 10px; text-transform: uppercase;">
+    Support
+  </div>
+
+  <div style="margin: 0 20px;">
+
+    <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+      
+      <ion-input type="search" name="Query" placeholder="search" [(ngModel)]="Query" (ionChange)="Search()">
+        <ion-icon name="search" slot="start" style="padding-right: 10px;"></ion-icon>
+      </ion-input>
+      
+    </ion-item>
+  
+    <p></p>
+  
+    <ion-list>
+  
+      <div *ngFor="let c of this.chatservice.Chats">
+  
+        <ion-item (click)="GoToChat(c.Id)" *ngIf="c != undefined" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px;">
+    
+          <ion-label [class.bold]="c.MessageStatus == 0 && c.MessageSenderUserId != this.auth.CurrentUser.Id">
+            
+            <p *ngIf="this.auth.CurrentUser.IsAdmin" style="color: #002e70 !important; text-transform: uppercase;">
+              <b>{{c.OwnerName}} <small style="font-size: 11px !important;">(Client)</small></b>
+            </p>
+            <p *ngIf="!this.auth.CurrentUser.IsAdmin" style="color: #002e70 !important; text-transform: uppercase;">
+              <b>{{c.SupportName}} <small style="font-size: 11px !important;">(Support)</small></b>
+            </p>
+            
+            <span>
+                {{c.Message}}
+            </span>
+    
+            <p style="font-size: 10px !important; margin-top: 5px !important; font-weight: normal !important;">
+              {{this.auth.GetShortDate(c.MessageCreatedOn, 'yyyy/MM/dd')}} @ {{this.auth.GetShortTime(c.MessageCreatedOn)}}
+            </p>
+    
+          </ion-label>
+          
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    
+        </ion-item>
+  
+      </div>
+  
+    </ion-list>
+
+  </div>
+
+  <ion-infinite-scroll threshold="200px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

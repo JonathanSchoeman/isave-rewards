@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-bottom: 10px; text-transform: uppercase; margin-top: -3px;">
+    Specials
+    <ion-icon name="cart-outline" slot="end" style="color: #ffffff; font-size: 25px; float: right;"></ion-icon>
+  </div>
+
+  <ion-grid style="padding: 0px;">
+    <ion-row>
+      <ion-col [class.selected]="this.Page == 1" (click)="this.Page=1;" style="padding-bottom: 10px; color: #bbb7b7; border-bottom: 1px solid #000000; text-align: center;">
+        All
+      </ion-col>
+      <ion-col [class.selected]="this.Page == 2" (click)="this.Page=2;" style="padding-bottom: 10px; color: #bbb7b7; border-bottom: 1px solid #000000; text-align: center;">
+        Unused
+      </ion-col>
+      <ion-col [class.selected]="this.Page == 3" (click)="this.Page=3;" style="padding-bottom: 10px; color: #bbb7b7; border-bottom: 1px solid #000000; text-align: center;">
+        Used
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

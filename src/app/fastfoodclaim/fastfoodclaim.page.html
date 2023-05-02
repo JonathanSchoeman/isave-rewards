@@ -1,0 +1,94 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true" style="--background: #f1f1f2;">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-top: -3px; text-transform: uppercase;">
+    {{this.auth.VoucherDeal.TradingPartnerName}} - New Claim
+  </div>
+
+  <ion-card>
+
+    <ion-card-header>
+
+      <ion-card-title style="font-size: 15px;">
+        Complete & confirm details
+      </ion-card-title>
+      
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item (click)="this.Back()" style="--padding-start: 0px; --inner-padding-start: 0px;">
+        <ion-label>
+          {{this.auth.Restaurant.Name}}
+        </ion-label>
+        <ion-icon name="search" slot="end" style="color: #58585b;"></ion-icon>
+      </ion-item>
+
+      <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+        <ion-label class="required">* Mobile Number</ion-label>
+        <ion-input type="text" name="MobileNumber" [(ngModel)]="MobileNumber" required="required"></ion-input>
+      </ion-item>
+  
+      <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+        <ion-label class="required">* Receipt Date/Time:</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY HH:mm A" name="ReceiptDate" [(ngModel)]="ReceiptDate" required="required"></ion-datetime>
+      </ion-item>
+  
+      <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+        <ion-label class="required">* Receipt Total (excl. tip):</ion-label>
+        <ion-input type="decimal" name="ReceiptTotal" [(ngModel)]="ReceiptTotal" required="required"></ion-input>
+      </ion-item>
+  
+      <ul class="receipt-list">
+        <li *ngFor="let r of this.ReceiptUrls; let i = index">
+          <img [src]="r" />
+          <span style="font-size: 20px; display: block;">
+            <ion-icon name="trash-outline" (click)="this.DeletePhoto(i)" style="font-size: 20px;"></ion-icon>
+          </span>
+        </li>
+        <li style="font-size: 25px; padding-right: 0;">
+          <ion-icon name="camera" (click)="this.PresentPhotoOptions()"></ion-icon>
+          <span style="font-size: 13px; display: block;">Upload Receipt</span>
+        </li>
+      </ul>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <a (click)="this.ProcessInvoice()" style="color: #fff !important; position: absolute; right: 10px;">Submit</a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

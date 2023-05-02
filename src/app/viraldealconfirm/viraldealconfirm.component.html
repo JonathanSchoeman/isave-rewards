@@ -1,0 +1,38 @@
+
+
+<div style="background: #fff; text-align: center; padding: 10px 20px;">
+
+  <p style="font-size: 16px !important; margin-top: 0;">
+    E-Card Voucher
+  </p>
+
+  <p>
+    You are about to request a {{this.auth.VoucherDeal.TradingPartnerName}} discount shopping E-Card.
+  </p>
+
+  <p *ngIf="this.auth.VoucherDeal.FormUrl != null" style="margin-bottom: 0;">
+    Simply click the following button to redeem your R1000 discount Voucher.
+    You will be redirected to the {{this.auth.VoucherDeal.TradingPartnerName}} website to claim your discount.
+  </p>
+
+  <ion-grid style="margin: 10px -20px -10px -20px; text-align: center; padding: 0px !important;">
+    
+    <ion-row>
+      <ion-col (click)="Cancel()" style="padding: 15px 0; background: #58585b; border-top: 1px solid #fff; border-right: 1px solid #fff;" class="ion-text-center">
+  
+        <a style="color: #fff;">Cancel</a>
+  
+      </ion-col>
+      <ion-col *ngIf="this.auth.VoucherDeal.FormUrl == null" (click)="Continue()" style="padding: 15px 0; background: #f28522; border-top: 1px solid #fff;" class="ion-text-center">
+  
+        <a style="color: #fff;">Continue</a>
+  
+      </ion-col>
+      <ion-col (click)="GoToForm()" *ngIf="this.auth.VoucherDeal.FormUrl != null" style="padding: 15px 0; background: #f28522; border-top: 1px solid #fff;" class="ion-text-center">
+        <a style="color: #fff;">Continue</a>
+      </ion-col>
+    </ion-row>
+  
+  </ion-grid>
+
+</div>

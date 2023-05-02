@@ -1,0 +1,57 @@
+<ion-app>
+
+  <ion-split-pane contentId="main-content">
+
+    <ion-menu contentId="main-content" type="overlay">
+
+      <ion-content>
+
+        <ion-grid style="text-align: center;">
+          <ion-row>
+            <ion-col style="display: flex; justify-content: center;">
+              <ion-avatar style="width: 60px; height: 60px;" (click)="this.auth.GoToPage('profile', false, true)">
+                <img alt="User Profile" [src]="this.auth.SelfieUrl" />
+              </ion-avatar>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-label *ngIf="this.auth.DeviceUser != undefined" style="color: #58585b; font-weight: bold;">
+                {{this.auth.DeviceUser.Name}} {{this.auth.DeviceUser.Surname}}
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-list id="inbox-list" class="menu">
+
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item (click)="selectedIndex = i" routerDirection="forward" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i" *ngIf="(this.auth.CurrentUser != undefined && this.auth.CurrentUser.SendChat) || p.url != '/chats'">
+
+              <img alt=".." [src]="'../../assets/imgs/' + p.icon" />
+              <!--<ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>-->
+
+              <ion-label>{{ p.title }}</ion-label>
+
+            </ion-item>
+
+          </ion-menu-toggle>
+
+        </ion-list>
+
+        <a class="logout" (click)="this.auth.GoToPage('logout', false, true)">
+          <ion-icon slot="start" [ios]="'log-out-outline'" [md]="'log-out-sharp'"></ion-icon>
+          Logout
+        </a>
+
+      </ion-content>
+
+    </ion-menu>
+
+    <ion-router-outlet id="main-content">
+
+    </ion-router-outlet>
+
+  </ion-split-pane>
+
+</ion-app>

@@ -1,0 +1,96 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true" style="padding: 0 20px;">
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-bottom: 10px; text-transform: uppercase;">
+
+    <ion-label *ngIf="this.auth.CurrentUser.IsAdmin">
+      Chat <small>with {{this.chatservice.Chat.OwnerName}} - {{this.chatservice.Chat.DepartmentName}}</small>
+    </ion-label>
+
+    <ion-label *ngIf="!this.auth.CurrentUser.IsAdmin">
+      Chat <small>with {{this.chatservice.Chat.SupportName}} - {{this.chatservice.Chat.DepartmentName}}</small>
+    </ion-label>
+
+    <div style="clear: both;"></div>
+  </div>
+
+  <p>
+    &nbsp;
+  </p>
+
+  <div style="margin: 0 20px;">
+
+    <div style="margin-bottom: 100px;">
+  
+      <p *ngFor="let m of this.chatservice.Chat.Messages" style="margin-top: 0px;">
+    
+        <span class="message-piece" [class.left]="m.IsSupport">
+          <ion-icon name="caret-up-outline"></ion-icon>
+    
+          {{m.Details}} <br/>
+    
+          <em>
+            {{this.auth.GetShortDate(m.CreatedOn, 'yyyy/MM/dd')}} @ {{this.auth.GetShortTime(m.CreatedOn)}}
+          </em>
+        </span>
+    
+        <span style="clear: both; display: block;"></span>
+    
+      </p>
+  
+      <div style="clear: both;"></div>
+  
+    </div>
+  
+    <div class="reply">
+  
+      <ion-grid>
+  
+        <ion-row>
+    
+          <ion-col size="11">
+    
+            <ion-textarea auto-grow="translucent" type="text" name="Detail" [(ngModel)]="Details" required="required"></ion-textarea>
+            
+          </ion-col>
+          <ion-col size="1" style="display: flex; justify-content: flex-end; align-items: flex-end;">
+      
+            <ion-icon class="send" name="send" (click)="Send();"></ion-icon>
+            
+          </ion-col>
+    
+        </ion-row>
+  
+      </ion-grid>
+  
+    </div>
+
+  </div>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

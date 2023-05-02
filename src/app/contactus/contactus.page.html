@@ -1,0 +1,161 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content [fullscreen]="true" style="padding: 0 20px;">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-bottom: 10px; text-transform: uppercase;">
+    Contact Us
+  </div>
+
+  <div style="color: #000000; box-shadow: 1px 2px 18px rgba(216, 178, 88, 0.2); border-radius: 6px; margin: 0 20px; padding: 10px; margin-top: 20px; font-size: 13px;">
+
+    <p style="margin-top: 0;">
+      <strong>Contact Information</strong>
+    </p>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" style="color: #000000; padding: 0; margin-bottom: 10px;">
+          Tel
+        </ion-col>
+        <ion-col size="9" style="color: #58585b; padding: 0;">
+          <a (click)="this.auth.OnShowContact(this.auth.Rules.Client.DRCallCentreNo)" style="color: #58585b !important;">
+            {{this.auth.Rules.Client.DRCallCentreNo}}
+          </a>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="3" style="color: #000000; padding: 0; margin-bottom: 10px;">
+          Whatsapp
+        </ion-col>
+        <ion-col size="9" style="color: #58585b; padding: 0;">
+          <a (click)="this.OpenWhatsApp(this.auth.Rules.Client.DRWhatsapp)">
+            {{this.auth.Rules.Client.DRWhatsapp}}
+          </a>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="3" style="color: #000000; padding: 0;">
+          Email
+        </ion-col>
+        <ion-col size="9" style="color: #58585b; padding: 0;">
+          <a [href]="'mailto:' + this.auth.Rules.DREmailAddress" style="color: #58585b !important;">
+            {{this.auth.Rules.Client.DREmailAddress}}
+          </a>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+  <div style="color: #000000; box-shadow: 1px 2px 18px rgba(216, 178, 88, 0.2); border-radius: 6px; margin: 0 20px; padding: 10px; margin-top: 20px; font-size: 13px;">
+
+    <p style="margin-top: 0;">
+      <strong>Operating Hours</strong>
+    </p>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="8" style="color: #000000; padding: 0; margin-bottom: 10px;">
+          Monday - Friday
+        </ion-col>
+        <ion-col size="4" style="color: #58585b; padding: 0;">
+          <span *ngIf="this.auth.Rules.Client.MondayFridayStart != null && this.auth.Rules.Client.MondayFridayEnd != null">
+            {{this.auth.GetFormatTime(this.auth.Rules.Client.MondayFridayStart)}} - {{this.auth.GetFormatTime(this.auth.Rules.Client.MondayFridayEnd)}}
+          </span>
+          <span *ngIf="this.auth.Rules.Client.MondayFridayStart == null || this.auth.Rules.Client.MondayFridayEnd == null">
+            Closed
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8" style="color: #000000; padding: 0; margin-bottom: 10px;">
+          Saturday
+        </ion-col>
+        <ion-col size="4" style="color: #58585b; padding: 0;">
+          <span *ngIf="this.auth.Rules.Client.SaturdayStart != null && this.auth.Rules.Client.SaturdayEnd != null">
+            {{this.auth.GetFormatTime(this.auth.Rules.Client.SaturdayStart)}} - {{this.auth.GetFormatTime(this.auth.Rules.Client.SaturdayEnd)}}
+          </span>
+          <span *ngIf="this.auth.Rules.Client.SaturdayStart == null || this.auth.Rules.Client.SaturdayEnd == null">
+            Closed
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8" style="color: #000000; padding: 0; margin-bottom: 10px;">
+          Sunday
+        </ion-col>
+        <ion-col size="4" style="color: #58585b; padding: 0;">
+          <span *ngIf="this.auth.Rules.Client.SundayStart != null && this.auth.Rules.Client.SundayEnd != null">
+            {{this.auth.GetFormatTime(this.auth.Rules.Client.SundayStart)}} - {{this.auth.GetFormatTime(this.auth.Rules.Client.SundayEnd)}}
+          </span>
+          <span *ngIf="this.auth.Rules.Client.SundayStart == null || this.auth.Rules.Client.SundayEnd == null">
+            Closed
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8" style="color: #000000; padding: 0;">
+          Public Holidays
+        </ion-col>
+        <ion-col size="4" style="color: #58585b; padding: 0;">
+          <span *ngIf="this.auth.Rules.Client.PublicHolidayStart != null && this.auth.Rules.Client.PublicHolidayEnd != null">
+            {{this.auth.GetFormatTime(this.auth.Rules.Client.PublicHolidayStart)}} - {{this.auth.GetFormatTime(this.auth.Rules.Client.PublicHolidayEnd)}}
+          </span>
+          <span *ngIf="this.auth.Rules.Client.PublicHolidayStart == null || this.auth.Rules.Client.PublicHolidayEnd == null">
+            Closed
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+  <div style="color: #000000; box-shadow: 1px 2px 18px rgba(216, 178, 88, 0.2); border-radius: 6px; margin: 0 20px; padding: 10px; margin-top: 20px; font-size: 13px;">
+
+    <p style="margin-top: 0;">
+      <strong>Physical Address</strong>
+    </p>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col style="color: #000000; padding: 0; line-height: 25px;">
+          <div class="rich-text" [innerHTML]="this.auth.Rules.Client.Address"></div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

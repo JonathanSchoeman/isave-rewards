@@ -1,0 +1,7 @@
+{
+  "name": "isave-rewards",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,40 @@
+
+<div style="background: #fff; text-align: center; padding: 10px;">
+
+  <p style="font-size: 12px !important; margin-top: 0; font-weight: bold;">
+    Code for R{{this.Coupon.Denomination}} {{this.Coupon.ItemCountDescription}}
+  </p>
+
+  <p style="font-size: 12px !important; margin-bottom: 0;">
+    Coupon Code:
+  </p>
+
+  <p style="font-size: 15px !important; font-weight: bold; margin-top: 5px;">
+    {{this.Coupon.IssuedCode}}
+  </p>
+
+  <p style="font-size: 12px !important; margin-bottom: 30px;">
+    Expiry Date: {{this.Coupon.IssueDateDescription}}
+  </p>
+
+  <div [innerHTML]="this.auth.Coupon.WalletTnC" class="rich-text"></div>
+
+  <ion-grid style="margin: 10px -10px -10px -10px; text-align: center; padding: 0px !important;">
+    
+    <ion-row>
+      <ion-col size="6" style="border-top: 1px solid #fff; border-right: 1px solid #fff; padding: 0; background-color: #58585b;">
+  
+        <a (click)="this.Previous()" *ngIf="this.ShowPrevious" style="padding: 15px 0; display: block; color: #fff;">Previous</a>
+  
+      </ion-col>
+      <ion-col size="6" style="border-top: 1px solid #fff; padding: 0; background-color: #f28522;">
+
+        <a (click)="this.Next()" *ngIf="this.ShowNext" style="padding: 15px 0; display: block; color: #fff;">Next</a>
+        <a (click)="this.Done()" *ngIf="this.ShowDone" style="padding: 15px 0; display: block; color: #fff;">Done</a>
+  
+      </ion-col>
+    </ion-row>
+  
+  </ion-grid>
+
+</div>

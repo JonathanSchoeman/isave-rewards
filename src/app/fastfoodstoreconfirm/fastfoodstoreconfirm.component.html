@@ -1,0 +1,38 @@
+
+<div style="background: #fff; text-align: center; padding: 10px 20px;">
+
+  <p style="font-size: 16px !important; font-weight: bold; margin-top: 0;">
+    {{this.auth.Restaurant.Name}}
+  </p>
+
+  <p>
+    Remember, you can eat for less at over 520 participating Fast Food stores countrywide.
+  </p>
+
+  <p style="font-size: 12px; margin-bottom: 0; display: none;">
+    {{this.auth.MakeRestaurantAddress(this.auth.Restaurant)}}
+  </p>
+
+  <p style="font-size: 12px;">
+    After placing your order, submit your claim here by clicking the 'Start Claim' button below.
+  </p>
+
+  <ion-grid style="margin: 10px -20px -10px -20px; text-align: center; padding: 0px !important;">
+    
+    <ion-row>
+      <ion-col (click)="this.NotNow()" style="padding: 15px 0; background-color: #58585b; border-top: 1px solid #fff; border-right: 1px solid #fff;" class="ion-text-center">
+  
+        <a style="color: #fff;">Not Now</a>
+  
+      </ion-col>
+      <ion-col (click)="this.StartClaim()" style="padding: 15px 0; background-color: #f28522; border-top: 1px solid #fff;" class="ion-text-center">
+  
+        <a style="color: #fff;">Start Claim</a>
+  
+      </ion-col>
+    </ion-row>
+  
+  </ion-grid>
+
+</div>
+

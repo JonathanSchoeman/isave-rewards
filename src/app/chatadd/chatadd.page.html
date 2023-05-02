@@ -1,0 +1,70 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true" style="padding: 0 20px;">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-bottom: 10px; text-transform: uppercase;">
+    Chat with us
+  </div>
+
+  <div style="margin: 0 20px;">
+
+    <p style="font-size: 13px;">
+      Select a department and enter your message below to get help.
+    </p>
+
+    <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+      <ion-label>Topic *</ion-label>
+      <ion-select name="DepartmentId" [(ngModel)]="DepartmentId">
+        <ion-select-option *ngFor="let x of this.chatservice.Departments" [value]="x.Id">{{x.Name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+      <ion-label class="required">Message *</ion-label>
+      <ion-textarea type="text" name="Detail" [(ngModel)]="Details" required="required"></ion-textarea>
+    </ion-item>
+  
+    <div text-left style="margin-top: 20px; padding: 20px 0; text-align: center;">
+  
+      <ion-button (click)="Send()" type="button" shape="round" expand="full" style="--background: #58585b; color: #ffffff;">
+        Send
+        <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
+      </ion-button>
+  
+    </div>
+
+  </div>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

@@ -1,0 +1,98 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true" style="--background: #f1f1f2;">
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-top: -3px; text-transform: uppercase; position: relative;">
+    Redeem Coupons
+  </div>
+
+  <ion-grid style="text-align: center; padding: 10px; color: #000000; box-shadow: 0 10px 6px -6px #777; background: #ffffff; margin-bottom: 15px;">
+
+    <ion-row>
+      <ion-col size="4" style="text-align: left; padding: 0; display: flex; align-items: center; padding-right: 10px;">
+        <img alt="." [src]="this.auth.CouponDeal.PartnerWidgetImage" style="max-width: 100%; max-height: 100px; padding: 0;" />
+      </ion-col>
+      <ion-col size="8">
+
+        <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+          <ion-icon name="search" slot="start" style="margin-right: 10px;"></ion-icon>
+          <ion-input type="search" name="Query" placeholder="search" [(ngModel)]="Query" (ionChange)="this.Search()"></ion-input>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <div *ngFor="let d of this.Coupons">
+
+    <ion-item *ngIf="d != undefined" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3" style="justify-content: center; padding: 0; height: 70px; display: flex; align-items: center; padding-right: 10px;">
+
+            <img [src]="d.VoucherMediumImage || d.VoucherLargeImage || d.VoucherSmallImage" style="max-height: 100%; max-width: 100%;" />
+
+          </ion-col>
+          <ion-col size="6" style="text-align: left; padding: 0;">
+
+            <strong style="padding-bottom: 10px; padding-top: 10px; display: block;">{{d.DiscountDisplay}} off</strong>
+        
+            <span style="font-size: 11px !important; white-space: normal;">
+                {{d.Name}}
+            </span>
+
+          </ion-col>
+          <ion-col size="3" style="text-align: center; padding: 0;"> 
+            
+            <small style="display: block; font-size: 12px !important; padding-bottom: 5px;">Available: {{d.AvailableCoupons}}</small>
+
+            <ion-icon name="remove-circle-outline" (click)="this.RemoveFromCart(d.Guid)" style="color: #58585b; font-size: 25px !important;"></ion-icon>
+    
+            <span style="font-size: 18px !important; display: inline-block ;padding: 0 5px; vertical-align: super;">
+              {{d.CouponsInCart}}
+            </span>
+    
+            <ion-icon name="add-circle-outline" (click)="this.AddToCart(d.Guid)" style="color: #f28522; font-size: 25px !important;"></ion-icon>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-item>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <a (click)="this.GoToCart()" style="color: #fff !important; position: absolute; right: 10px;">Redeem</a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

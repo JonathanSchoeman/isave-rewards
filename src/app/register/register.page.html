@@ -1,0 +1,86 @@
+
+<ion-content [fullscreen]="true" style="padding: 20px;">
+
+  <div style="text-align: center; padding: 80px; margin-bottom: 0;">
+      <img alt="iSave Rewards Logo" height="100%" src="../../assets/imgs/isave-rewards-logo.png" style="max-height: 200px;" />
+  </div>
+
+  <div style="padding: 0 20px;">
+
+    <form (submit)="SignUp()">
+
+      <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+        <ion-input type="text" name="MembershipId" [(ngModel)]="MembershipId" placeholder="Membership ID">
+          <ion-icon name="person-outline" slot="left" style="color: #58585b; padding-right: 10px;"></ion-icon>
+        </ion-input>
+      </ion-item>
+
+      <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+        <ion-input type="text" name="MobileNumber" [(ngModel)]="MobileNumber" placeholder="Mobile Number">
+          <ion-icon name="phone-portrait-outline" slot="left" style="color: #58585b; padding-right: 10px;"></ion-icon>
+        </ion-input>
+      </ion-item>
+
+      <ion-grid style="padding: 0;">
+    
+        <ion-row>
+          <ion-col size="6" style="text-align: left; display: flex; align-items: center;">
+
+            <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+              <ion-input type="password" name="Pin" [(ngModel)]="Pin" placeholder="Create Pin">
+                <ion-icon name="lock-closed-outline" slot="left" style="color: #58585b; padding-right: 10px;"></ion-icon>
+              </ion-input>
+            </ion-item>
+
+          </ion-col>
+          <ion-col size="6" style="text-align: right;">
+
+            <ion-item style="--padding-start: 0px; --inner-padding-start: 0px;">
+              <ion-input type="password" name="ConfirmPin" [(ngModel)]="ConfirmPin" placeholder="Retype Pin">
+                <ion-icon name="lock-closed-outline" slot="left" style="color: #58585b; padding-right: 10px;"></ion-icon>
+              </ion-input>
+            </ion-item>
+
+          </ion-col>
+        </ion-row>
+    
+      </ion-grid>
+
+      <ion-grid style="padding: 0; margin-top: 10px;">
+        
+        <ion-row>
+          <ion-col size="12" style="padding: 0; text-align: center;" class="ion-text-center">
+
+            <ion-button type="submit" shape="round" fill="full" style="--background: #f28522; color: #ffffff;">
+              Register
+            </ion-button>
+
+          </ion-col>
+        </ion-row>
+    
+        <ion-row>
+          <ion-col size="12" style="padding: 0; text-align: center; padding-top: 10px;" class="ion-text-center">
+
+            <a (click)="ConfirmOTP()" style="border-bottom: 1px solid #58585b;">
+              Already Received an OTP?
+            </a>
+
+          </ion-col>
+        </ion-row>
+    
+      </ion-grid>
+  
+    </form>
+
+  </div>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <div style="clear: both;"></div>
+</ion-footer>

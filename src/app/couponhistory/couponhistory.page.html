@@ -1,0 +1,123 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true" style="--background: #f1f1f2;">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-refresher (ionRefresh)="this.Refresh($event)" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-top: -3px; text-transform: uppercase;">
+    Coupons
+  </div>
+
+  <ion-list style="background: #f1f1f2 !important; padding-top: 0px;">
+    <div *ngFor="let d of this.Coupons">
+      <ion-item *ngIf="d != undefined" (click)="this.GoToCoupon(d.DRReference)" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3" style="justify-content: center; padding: 0; height: 35px; display: flex; align-items: center; padding-right: 10px;">
+              <img [src]="d.PartnerWidgetImage" style="max-height: 100%; max-width: 100%;" />
+            </ion-col>
+            <ion-col size="6" style="text-align: left; padding: 0; display: flex; align-items: center;">
+              <ion-label>
+  
+                <strong style="display: block; font-size: 12px;">{{d.ItemCount}} {{d.ItemCountDescription}} Redeemed</strong>
+                
+                <span style="font-size: 12px !important;">
+                    Total savings of R{{d.Saving}}
+                </span>
+        
+              </ion-label>
+            </ion-col>
+            <ion-col size="3" style="padding: 0; display: flex; align-items: center; justify-content: end;">
+              <ion-label style="text-align: right;">
+                <span style="display: block; font-size: 12px !important; padding-bottom: 5px;">
+                  {{d.IssueDateDescription}}
+                </span>
+                <ion-icon name="chevron-forward-outline" slot="end" style="color: #58585b;"></ion-icon>
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <!--
+
+  <ion-list style="background: #f1f1f2 !important; padding-top: 0px;">
+
+    <div *ngFor="let d of this.Coupons">
+
+      <ion-item (click)="this.GoToCoupon(d.CampaignPurchaseId)" *ngIf="d.CouponDeal != undefined" style="--padding-start: 0px; --inner-padding-start: 0px; --padding-end: 0px; --inner-padding-end: 0px; box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); margin: 10px;">
+
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3" style="text-align: center; padding: 0;">
+              <img [src]="d.CouponDeal.VoucherMediumImage" style="max-height: 110px; padding: 10px;" />
+            </ion-col>
+            <ion-col size="8" style="text-align: left; padding: 10px 0;">
+              <strong style="padding-bottom: 10px; display: block; font-size: 12px;">
+                {{d.CouponDeal.DiscountDisplay}} off {{d.CouponDeal.Name}}
+              </strong>
+          
+              <span style="font-size: 12px; display: block;">
+                Coupon Code: {{d.VoucherCode}}
+              </span>
+              
+              <span style="font-size: 12px; display: block;">
+                Expiry Date: {{d.VoucherExpiryDate1}}
+              </span>
+            </ion-col>
+            <ion-col size="1" style="text-align: right; padding: 0; display: flex; align-items: center;">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  
+      </ion-item>
+
+    </div>
+
+  </ion-list>-->
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

@@ -1,0 +1,156 @@
+ion-menu ion-content {
+  --background: #fff;
+}
+
+ion-menu.md ion-content {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+}
+
+ion-menu.md ion-list {
+  padding: 20px 0;
+}
+
+ion-menu.md ion-note {
+  margin-bottom: 30px;
+}
+
+ion-menu.md ion-list-header,
+ion-menu.md ion-note {
+  padding-left: 10px;
+}
+
+ion-menu.md ion-list#inbox-list {
+  border-bottom: 0px solid var(--ion-color-step-150, #ffffff);
+}
+
+ion-menu.md ion-list#inbox-list ion-list-header {
+  font-size: 22px;
+  font-weight: 600;
+
+  min-height: 20px;
+}
+
+ion-menu.md ion-list#labels-list ion-list-header {
+  font-size: 16px;
+
+  margin-bottom: 18px;
+
+  color: #ffffff;
+
+  min-height: 26px;
+}
+
+ion-menu.md ion-item {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  border-radius: 4px;
+}
+
+ion-menu.md ion-item.selected, ion-menu.ios ion-item.selected {
+  --background: rgba(var(--ion-color-primary-rgb), 0.14);
+}
+
+ion-menu.md ion-item.selected ion-icon {
+  color: #000000;
+}
+
+ion-menu.md ion-item ion-icon {
+  color: #58585b;
+}
+
+ion-menu.md ion-item ion-label {
+  font-weight: 500;
+}
+
+ion-menu.ios ion-content {
+  --padding-bottom: 20px;
+}
+
+ion-menu.ios ion-list {
+  padding: 20px 0 0 0;
+}
+
+ion-menu.ios ion-note {
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+
+ion-menu.ios ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 50px;
+}
+
+ion-menu.ios ion-item.selected ion-icon {
+  color: #000000;
+}
+
+ion-menu.ios ion-item ion-icon {
+  font-size: 24px;
+  color: #58585b;
+}
+
+ion-menu.ios ion-list#labels-list ion-list-header {
+  margin-bottom: 8px;
+}
+
+ion-menu.ios ion-list-header,
+ion-menu.ios ion-note {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+ion-menu.ios ion-note {
+  margin-bottom: 8px;
+}
+
+ion-menu.md ion-item ion-label, ion-menu.ios ion-item ion-label {
+  color: #000000;
+}
+
+ion-note {
+  display: inline-block;
+  font-size: 16px;
+
+  color: var(--ion-color-medium-shade);
+}
+
+ion-item.selected {
+  --color: var(--ion-color-primary);
+}
+
+ion-toggle {
+  --background: #58585b;
+  --background-checked: #58585b;
+
+  --handle-background: #f0e5d1;
+  --handle-background-checked: #f0e5d1;
+}
+
+ion-button {
+  font-size: 12px;
+  text-transform: none;
+ }
+
+ .logout {
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    padding: 30px 0;
+    cursor: pointer;
+    font-size: 16px;
+    color: #000000;
+    text-align: center;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #000000;
+ }
+
+ .logout ion-icon {
+    font-size: 25px;
+    margin-right: 5px;
+ }

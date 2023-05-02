@@ -1,0 +1,83 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <img alt="User Profile" [src]="this.auth.MarketingBannerUrl" style="max-width: 100%;" />
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-bottom: 10px; text-transform: uppercase; margin-top: -3px;">
+    My Wallet
+  </div>
+
+  <ion-grid style="text-align: center; padding: 0 10px; margin-top: 20px; color: #000000; font-size: 13px;">
+
+    <ion-row>
+
+      <ion-col style="box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 10px; margin: 0 10px 20px 0; padding: 0">
+        <a (click)="this.auth.GoToPage('couponhistory');" style="text-align: center; display: block; text-decoration: none;">
+
+          <p style="margin-top: 20px;">
+            <img alt="coupons" src="./../assets/imgs/my-wallet-coupons.png" style="height: 30px; width: 30px;" />
+          </p>
+
+          <p style="margin-top: 0; margin-bottom: 20px; color: #000000;">
+            Coupons
+          </p>
+        </a>
+      </ion-col>
+
+      <ion-col style="box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 10px; margin: 0 10px 20px 0; padding: 0">
+        <a (click)="this.auth.GoToPage('voucherhistory');" style="text-align: center; display: block; text-decoration: none;">
+
+          <p style="margin-top: 20px;">
+            <img alt="coupons" src="./../assets/imgs/my-wallet-vouchers.png" style="height: 30px; width: 30px;" />
+          </p>
+
+          <p style="margin-top: 0; margin-bottom: 20px; color: #000000;">
+            Vouchers
+          </p>
+        </a>
+      </ion-col>
+
+      <ion-col style="box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 10px; padding: 0; margin: 0 0 20px 0;">
+        <a (click)="this.auth.GoToPage('specialhistory');" style="text-align: center; display: block; text-decoration: none;">
+
+          <p style="margin-top: 20px;">
+            <img alt="coupons" src="./../assets/imgs/my-wallet-specials.png" style="height: 30px; width: 30px;" />
+          </p>
+
+          <p style="margin-top: 0; margin-bottom: 20px; color: #000000;">
+            Specials
+          </p>
+        </a>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

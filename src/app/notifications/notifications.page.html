@@ -1,0 +1,92 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-refresher (ionRefresh)="Refresh($event)" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-bottom: 10px; text-transform: uppercase;">
+    Notifications
+  </div>
+
+  <div style="margin: 0 20px; color: #000000;">
+
+    <ion-item style="margin-bottom: 20px; --padding-start: 0px; --inner-padding-start: 0px;">
+      <ion-icon name="search" slot="start"></ion-icon>
+      <ion-input type="search" name="Query" placeholder="search" [(ngModel)]="Query" (ionChange)="Search()"></ion-input>
+    </ion-item>
+  
+    <ion-list *ngIf="Notifications != undefined && Notifications.length > 0">
+  
+      <div *ngFor="let r of Notifications">
+  
+        <ion-item *ngIf="r != undefined" style="--padding-start: 0px; --inner-padding-start: 0px;">
+    
+          <ion-label (click)="GoToNotification(r.Id)" [class]="r.Status == 0 ? 'unread': ''">
+    
+            <ion-icon *ngIf="r.Status == 0" name="mail"></ion-icon>
+      
+            <ion-icon *ngIf="r.Status == 1" name="mail-open"></ion-icon>
+            
+            <p style="font-size: 13px !important;">
+              {{r.Title}}
+            </p>
+            
+            <p style="font-size: 12px !important; font-weight: normal !important; color: #58585b !important;">
+              {{r.Message}}
+            </p>
+    
+            <p style="font-size: 12px !important; font-weight: normal !important; color: #58585b !important;">
+              {{this.auth.GetShortDate(r.CreatedOn)}} @ {{this.auth.GetShortTime(r.CreatedOn)}}
+            </p>
+    
+          </ion-label>
+  
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    
+        </ion-item>
+  
+      </div>
+  
+    </ion-list>
+
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

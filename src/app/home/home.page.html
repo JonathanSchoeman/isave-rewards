@@ -1,0 +1,132 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #f28522 !important; background: #f28522 !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #f28522 !important; background: #f28522 !important; color: #ffffff !important; --min-height: 50px !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #fff;"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+        <ion-icon name="notifications-outline" size="large" (click)="this.auth.GoToPage('notifications', false, false)" style="color: #fff;"></ion-icon>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div style="text-align: center; position: relative; background-image: url('./../assets/imgs/home-bg.png'); background-position: center bottom; background-size: cover;background-repeat: no-repeat; padding: 80px 0;">
+
+    <ion-grid style="padding: 0;">
+      <ion-row>
+        <ion-col style="display: flex; justify-content: center; padding: 0;">
+
+          <ion-avatar style="width: 80px; height: 80px;" (click)="this.auth.GoToPage('profile', false, true)">
+            <img alt="User Profile" [src]="this.auth.SelfieUrl" />
+          </ion-avatar>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="font-weight: bold; color: #ffffff; margin-bottom: 0; padding: 10px 0;">
+
+          {{this.auth.CurrentUser.Name}} {{this.auth.CurrentUser.Surname}}
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="color: #fff; text-align: center; font-weight: bold;">
+
+          iSave Rewards
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+  <ion-grid style="text-align: center; padding: 0 10px; margin-top: 40px; color: #000000; font-size: 13px;">
+
+    <ion-row>
+
+      <ion-col (click)="this.auth.GoToPage('mydeals');" style="box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 10px; margin-right: 10px; width: 35%; padding: 0;">
+        <a style="text-align: center; display: block; text-decoration: none;">
+
+          <p style="margin-top: 20px;">
+            <img alt=".." src="../../assets/imgs/mydeals.png" style="width: 30px;" />
+          </p>
+
+          <p style="margin-top: 0; margin-bottom: 20px; color: #000000;">
+            My Deals
+          </p>
+        </a>
+      </ion-col>
+
+      <ion-col (click)="this.auth.GoToPage('mywallet');" style="box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 10px; margin-right: 10px; width: 35%; padding: 0;">
+        <a style="text-align: center; display: block; text-decoration: none;">
+
+          <p style="margin-top: 20px;">
+            <img alt=".." src="../../assets/imgs/mywallet.png" style="width: 30px;" />
+          </p>
+
+          <p style="margin-top: 0; margin-bottom: 20px; color: #000000;">
+            My Wallet
+          </p>
+        </a>
+      </ion-col>
+
+      <ion-col (click)="this.auth.GoToPage('notifications');" style="box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 10px; width: 35%; padding: 0;">
+        <a style="text-align: center; display: block; text-decoration: none;">
+
+          <p style="margin-top: 20px;">
+            <img alt=".." src="../../assets/imgs/notifications.png" style="width: 30px;" />
+          </p>
+
+          <p style="margin-top: 0; margin-bottom: 20px; color: #000000;">
+            Notifications
+          </p>
+        </a>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+
+      <ion-col (click)="this.auth.GoToPage('contactus');" style="box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 10px; margin-right: 10px; margin-top: 20px; width: 35%; padding: 0;">
+        <a style="text-align: center; display: block; text-decoration: none;">
+
+          <p style="margin-top: 20px;">
+            <img alt=".." src="../../assets/imgs/contactus.png" style="width: 30px;" />
+          </p>
+
+          <p style="margin-top: 0; margin-bottom: 20px; color: #000000;">
+            Contact Us
+          </p>
+        </a>
+      </ion-col>
+
+      <ion-col (click)="this.auth.GoToPage('profile');" style="box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 10px; margin-right: 10px; margin-top: 20px; width: 35%; padding: 0;">
+        <a style="text-align: center; display: block; text-decoration: none;">
+
+          <p style="margin-top: 20px;">
+            <img alt=".." src="../../assets/imgs/profile.png" style="width: 30px;" />
+          </p>
+
+          <p style="margin-top: 0; margin-bottom: 20px; color: #000000;">
+            Profile
+          </p>
+        </a>
+      </ion-col>
+      <ion-col (click)="this.auth.GoToPage('chats');" style="box-shadow: 1px 2px 6px rgba(136, 132, 132, 0.2); border-radius: 10px; margin-top: 20px; width: 35%; padding: 0;">
+        <a style="text-align: center; display: block; text-decoration: none;">
+
+          <p style="margin-top: 20px;">
+            <img alt=".." src="../../assets/imgs/support.png" style="width: 30px;" />
+          </p>
+
+          <p style="margin-top: 0; margin-bottom: 20px; color: #000000;">
+            Support
+          </p>
+        </a>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

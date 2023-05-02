@@ -1,0 +1,79 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start" *ngIf="this.auth.CurrentUser != undefined">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="this.auth.CurrentUser != undefined">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content [fullscreen]="true" style="padding: 0 20px;">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-bottom: 10px; text-transform: uppercase;">
+    Terms and Conditions
+  </div>
+
+  <div style="margin: 0 20px; color: #000000;">
+
+    <ion-grid style="padding: 0 !important;">
+      <ion-row>
+        <ion-col style="padding: 0 !important; display: flex; justify-content: start; padding-right: 5px !important;">
+
+          <a (click)="this.auth.OpenSystemLink('https://www.icebolethugroup.co.za/isave-rewards/')" style="background: #58585b; color: #ffffff; font-size: 13px; border-radius: 6px; padding: 10px 0; display: block; width: 100%; text-align: center;">
+            Terms and Conditions
+          </a>
+
+        </ion-col>
+        <ion-col style="padding: 0 !important; display: flex; justify-content: end; padding-left: 5px !important;">
+
+          <a (click)="this.auth.OpenSystemLink('https://www.icebolethugroup.co.za/isave-rewards/')" style="background: #58585b; color: #ffffff; font-size: 13px; border-radius: 6px; padding: 10px 0; display: block; width: 100%; text-align: center;">
+            Privacy Policy
+          </a>
+          
+        </ion-col>
+      </ion-row>
+      <ion-row style="display: none;">
+        <ion-col size="12" style="padding: 0 !important; text-align: center;">
+
+          <p style="margin: 10px 0 0 0;">
+
+            <a (click)="this.auth.OpenSystemLink('https://www.smartsaver.co.za/opt-out/')" style="background: #58585b; color: #ffffff; font-size: 13px; border-radius: 6px; padding: 10px 0; display: block; width: 100%; text-align: center;">
+              Marketing Preferences
+            </a>
+
+          </p>
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="rich-text" [innerHTML]="this.auth.Rules.Client.TnC" style="margin-bottom: 20px; padding-top: 20px;"></div>
+
+  </div>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)" *ngIf="this.auth.CurrentUser != undefined">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

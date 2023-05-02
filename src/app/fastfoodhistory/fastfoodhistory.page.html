@@ -1,0 +1,91 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #ffffff !important; background: #ffffff !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important; background: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #f28522;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <img alt="iSave Rewards Logo" src="../../assets/imgs/isave-rewards-logo.png" style="height: 90px;" />
+    </ion-title>
+    <ion-buttons slot="end">
+        <img alt=".." src="../../assets/imgs/notifications.png" (click)="this.auth.GoToPage('notifications', false, false)" style="width: 25px; margin-right: 10px" />
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true" style="--background: #f1f1f2;">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div style="background-color: #f28522; color: #ffffff; padding: 15px 0; font-weight: bold; text-align: center; margin-top: -3px; text-transform: uppercase;">
+    {{this.auth.VoucherDeal.TradingPartnerName}} - Claim History
+  </div>
+
+  <ion-item>
+    <ion-icon name="search" slot="start"></ion-icon>
+    <ion-input type="search" name="Query" placeholder="search" [(ngModel)]="Query" (ionChange)="this.Search()"></ion-input>
+  </ion-item>
+
+
+  <ion-list *ngIf="this.Claims != undefined && this.Claims.length > 0" style="padding: 10px;">
+
+    <div *ngFor="let r of this.Claims">
+
+      <ion-item *ngIf="r != undefined" style="--padding-start: 0px; --inner-padding-start: 0px;">
+  
+        <ion-label>
+  
+          <p style="font-weight: bold; font-size: 13px;">
+            {{r.Restaurant.Name}}
+          </p>
+  
+          <p style="font-size: 12px;">
+            Receipt Date:
+            <span>{{this.auth.GetShortDate(r.CampaignPurchase.PurchaseDate)}}</span>
+          </p>
+  
+          <p style="font-size: 12px;">
+            Total receipt amount (excl. tip):
+            <span>R{{r.CampaignPurchase.PurchaseAmt}}</span>
+          </p>
+          
+          <p style="font-size: 12px;">
+            Status:
+            <span>{{this.auth.GetInvoiceStatusDescription(r.CampaignPurchase.InvoiceStatus)}}</span>
+          </p>
+          
+          <p style="font-size: 12px;">
+            Reference:
+            <span>{{r.CampaignPurchase.DRReference}}</span>
+          </p>
+  
+        </ion-label>
+  
+      </ion-item>
+
+    </div>
+
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="this.LoadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+</ion-content>
+
+<ion-footer class="absolute-footer">
+
+  <ion-back-button defaultHref="login" style="color: #ffffff !important; --color: #ffffff !important;"></ion-back-button>
+
+  <a (click)="this.auth.GoToPage('home', true, true)">
+    <img alt=".." src="../../assets/imgs/go-home.png" />
+  </a>
+
+  <div style="clear: both;"></div>
+</ion-footer>

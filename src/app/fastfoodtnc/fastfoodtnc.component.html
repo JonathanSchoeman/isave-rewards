@@ -1,0 +1,44 @@
+
+<div style="background: #fff; text-align: center; padding: 10px 20px;">
+
+  <p style="font-size: 16px !important; margin-top: 0;">
+    Welcome to Fast Food | {{this.auth.VoucherDeal.TradingPartnerName}}
+  </p>
+
+  <p>
+    Remember, you can eat for less at over 520 participating Fast Food stores countrywide.
+  </p>
+
+  <p style="margin-bottom: 0;">
+    Find a store that is close to you. After placing your order, remember to submit your receipt within 24 hours by clicking on the claim button.
+  </p>
+
+  <p style="margin-bottom: 0;">
+    Select the store and submit your claim by simply uploading a clear picture of your receipt and completing the details.
+  </p>
+
+  <p>
+    You will receive a voucher for your next meal within just 3 working days.
+  </p>
+
+  <p>
+    <ion-item style="--background: none; --border-color: #000000;">
+      <ion-checkbox slot="start" [(ngModel)]="DontShowWelcome" style="margin-right: 10px;margin-left: -15px;"></ion-checkbox>
+      <ion-label style="font-size: 13px;">Do not show this again</ion-label>
+    </ion-item>
+  </p>
+
+  <ion-grid style="margin: 10px -20px -10px -20px; background: #f28522; text-align: center; padding: 0px !important;">
+    
+    <ion-row>
+      <ion-col (click)="Ok()" style="padding: 15px 0; border-top: 1px solid #fff;" class="ion-text-center">
+  
+        <a style="color: #fff;">Ok</a>
+  
+      </ion-col>
+    </ion-row>
+  
+  </ion-grid>
+
+</div>
+

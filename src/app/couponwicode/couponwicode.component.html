@@ -1,0 +1,26 @@
+
+<div style="background: #fff; text-align: center; padding: 10px;">
+
+  <p style="font-size: 17px !important; margin-top: 0; font-weight: bold;">
+    wiCode: {{this.Coupon.IssuedCode}}
+  </p>
+
+  <p style="font-size: 12px !important; margin-bottom: 30px;">
+    Expiry Date: {{this.Coupon.IssueDateDescription}}
+  </p>
+
+  <div [innerHTML]="this.auth.Coupon.WalletTnC" class="rich-text"></div>
+
+  <ion-grid style="margin: 10px -10px -10px -10px; background: #f28522; text-align: center; padding: 0px !important;">
+    
+    <ion-row>
+      <ion-col (click)="this.Done()" style="border-top: 1px solid #fff; padding: 0; text-align: center;">
+
+        <a style="padding: 15px 0; display: block; color: #fff;">Ok</a>
+  
+      </ion-col>
+    </ion-row>
+  
+  </ion-grid>
+
+</div>

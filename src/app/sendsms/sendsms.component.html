@@ -1,0 +1,27 @@
+
+<div style="background: #fff; text-align: center; padding: 10px 20px;">
+
+ 
+  <p style="font-size: 16px !important;">
+    Send <b>{{this.nav.get("Message")}}</b> to <b>{{this.nav.get("ContactNumber")}}</b>?
+  </p>
+
+  <ion-grid style="margin: 10px -20px -10px -20px; text-align: center; padding: 0px !important;">
+    
+    <ion-row>
+      <ion-col (click)="this.NotNow()" style="padding: 15px 0; background-color: #58585b; border-top: 1px solid #fff; border-right: 1px solid #fff;" class="ion-text-center">
+  
+        <a style="color: #fff;">Not Now</a>
+  
+      </ion-col>
+      <ion-col (click)="this.Send()" style="padding: 15px 0; background-color: #f28522; border-top: 1px solid #fff;" class="ion-text-center">
+  
+        <a style="color: #fff;">Send</a>
+  
+      </ion-col>
+    </ion-row>
+  
+  </ion-grid>
+
+</div>
+

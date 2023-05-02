@@ -1,0 +1,90 @@
+<ion-header class="ion-no-border" [translucent]="true" style="--background: #062d4a !important; background: #062d4a !important; color: #ffffff !important;">
+  <ion-toolbar style="--background: #062d4a !important; background: #062d4a !important; color: #ffffff !important;">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon name="notifications" size="large" (click)="GoToPage('notifications')"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" (ionScroll)="this.auth.OnScroll($event)" [scrollEvents]="true">
+  
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.auth.ShowScroll" (click)="this.auth.ScrollToTop();">
+    <ion-fab-button>
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-refresher (ionRefresh)="Refresh($event)" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div style="background-color: #062d4a; text-align: center; height: 150px; margin-top: -15px;">
+      <img alt="My Rewards Logo" height="100%" src="../../assets/imgs/my-rewards-logo.png" />
+  </div>
+
+  <div style="background-image:url('../../assets/imgs/sep-bg.png'); padding: 10px; font-weight: bold; text-align: center; margin-bottom: 10px;">
+      History
+  </div>
+
+  <ion-item>
+    <ion-icon name="search" slot="start"></ion-icon>
+    <ion-input type="search" name="Query" placeholder="search" [(ngModel)]="Query" (ionChange)="Search()"></ion-input>
+  </ion-item>
+
+
+  <ion-list *ngIf="Claims != undefined && Claims.length > 0">
+
+    <div *ngFor="let r of Claims">
+
+      <ion-item *ngIf="r != undefined">
+  
+        <ion-label (click)="GoToClaim(r.Id)">
+  
+          <p style="font-weight: bold; font-size: 13px;">
+            {{r.Restaurant.Name}}
+          </p>
+          
+          <p style="font-size: 12px;">
+            Reference:
+            <span>{{r.CampaignPurchase.DRReference}}</span>
+          </p>
+  
+          <p style="font-size: 12px;">
+            Dinner Date:
+            <span>{{this.auth.GetShortDate(r.CampaignPurchase.PurchaseDate)}}</span>
+          </p>
+          
+          <p style="font-size: 12px;">
+            Status:
+            <span>{{this.auth.GetInvoiceStatusDescription(r.CampaignPurchase.InvoiceStatus)}}</span>
+          </p>
+  
+        </ion-label>
+        
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  
+      </ion-item>
+
+    </div>
+
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  
+
+  <div style="margin-bottom: 80px;">&nbsp;</div>
+
+  <div class="absolute-footer">
+    <a (click)="GoToPage('home')">
+      <img alt="My Rewards Logo" src="../../assets/imgs/go-home.png" style="margin-top: -24px; height: 50px;" />
+    </a>
+  </div>
+
+</ion-content>

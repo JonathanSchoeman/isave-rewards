@@ -1,0 +1,29 @@
+ion-item * {
+    font-size: 13px !important;
+  }
+  
+  .success-message {
+      color: #229c1c;
+      padding: 5px 10px;
+      background-color: #bef2bb;
+    }
+    
+    .warn-message {
+      color: #EBA324;
+      padding: 5px 10px;
+      background-color: #FFE6BA;
+    }
+    
+    .error-message {
+      color: #e80c4d;
+      padding: 5px 10px;
+      background-color: #ffeeee;
+    }
+    
+    .orange {
+      color: #cd982e;
+    }
+    
+    .purple {
+      color: #c3456b;
+    }
